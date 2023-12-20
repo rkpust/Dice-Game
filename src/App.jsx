@@ -4,9 +4,11 @@ import PlayGame from "./components/PlayGame";
 
 function App() {
   const [isGameStarted, setIsGameStarted] = useState(false);
+  const audio = new Audio('audio/dice-rolling.mp3');
 
   const toggleGamePlay = () => {
     setIsGameStarted((previousState) => !previousState);
+    audio.play();
   };
 
   return (

@@ -14,15 +14,18 @@ export default TotalScore;
 const ScoreContainer = styled.div`
     max-width: 200px;
     text-align: center;
+    margin: 0;
+    padding: 0;
 
     h1 {
         font-size: 100px;
-        margin: 0 1px;
+        margin: 0;
+        padding: 0;
         line-height: 100px;
     }
 
     p { 
-        margin-top: 0;
+        margin: 0;
         font-size: 24px;
         font-weight: bold;
     }

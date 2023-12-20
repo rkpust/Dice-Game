@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import NumberSelector from "./NumberSelector";
 import TotalScore from "./TotalScore";
+import RollDice from "./RollDice";
 
 const PlayGame = () => {
   return (
@@ -9,6 +10,8 @@ const PlayGame = () => {
         <TotalScore />
         <NumberSelector />
       </div>
+      
+      <RollDice />
     </MainContainer>
   )
 }

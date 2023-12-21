@@ -1,24 +1,27 @@
 import styled from "styled-components";
 
-const NumberSelector = ({selectedNumber,setSelectedNumber}) => {
+const NumberSelector = ({selectedNumber, setSelectedNumber, error, setError}) => {
   const Number = [1, 2, 3, 4, 5, 6];
   const audio = new Audio('audio/clickselect.mp3');
 
   console.log(selectedNumber);
 
+  const numberSelectorHandler = (number) => {
+    setSelectedNumber(number);
+    audio.play();
+    setError("");
+  }
+
   return (
     <NumberSelectorContainer>
+        <p className="error">{error}</p>
         <div className="flex">
             {
                 Number.map((number, index) => 
                     <Box 
                         isSelected = {number == selectedNumber}
                         key={index} 
-                        onClick={() => {
-                            setSelectedNumber(number);
-                            audio.play();
-                            }
-                        }
+                        onClick={() => numberSelectorHandler(number)}
                     >
                         {number}
                     </Box>)
@@ -46,6 +49,12 @@ const NumberSelectorContainer = styled.div`
         text-align: center;
     }
 
+    .error {
+        font-size: 20px;
+        color: red;
+        text-align: center;
+    }
+
 `;
 
 const Box = styled.div`
@@ -55,7 +64,7 @@ const Box = styled.div`
     width: 72px;
     border: 1px solid black;
     border-radius: 5px;
-    font-size: 24px;
+    font-size: 36px;
     font-weight: bold;
     cursor: pointer;
     background-color: ${(props) => (props.isSelected ? "black" : "white")};

@@ -1,36 +1,9 @@
 import styled from "styled-components";
 
-const RollDice = ({currentDice, setCurrentDice, isSpinning, setIsSpinning}) => {
-    const audio = new Audio('audio/dice-rolling.mp3');
-
-    // generate random number between 1 to 6
-    const generateRandomNumber = () => {
-        return Math.floor(Math.random() * 6) + 1;
-    }
-
-    // set spinning state
-    const diceSpinning = () => {
-        setIsSpinning(!isSpinning);
-      };
-
-    // set dice functionality
-    const rollDice = () => {
-        audio.play();
-
-        const receivedNumber = generateRandomNumber();
-        console.log(receivedNumber);
-
-        setCurrentDice((prev) => receivedNumber)
-        
-    }
-    
-
+const RollDice = ({currentDice, isSpinning, rollDice}) => {
   return (
     <RollDiceContainer>
-        <div className="dice" onClick={() => {
-            rollDice();
-            diceSpinning();
-        }}>
+        <div className="dice" onClick={() => rollDice()}>
             <img src={`images/dices/dice_${currentDice}.png`} style={{ transform: isSpinning ? 'rotate(360deg)' : 'none', transition: 'transform 0.3s ease-in-out', }} height={180} width={180} alt={`Dice ${currentDice}`}/>
         </div>
         <p>Click on Dice to Roll</p>

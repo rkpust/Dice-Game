@@ -1,13 +1,10 @@
-import { useState } from "react";
 import styled from "styled-components";
 
-const NumberSelector = () => {
-  const [selectedNumber, setSelectedNumber] = useState();
+const NumberSelector = ({selectedNumber,setSelectedNumber}) => {
   const Number = [1, 2, 3, 4, 5, 6];
   const audio = new Audio('audio/clickselect.mp3');
 
   console.log(selectedNumber);
-
 
   return (
     <NumberSelectorContainer>

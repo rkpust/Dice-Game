@@ -1,17 +1,22 @@
+import { useState } from "react";
 import styled from "styled-components";
 import NumberSelector from "./NumberSelector";
 import TotalScore from "./TotalScore";
 import RollDice from "./RollDice";
 
 const PlayGame = () => {
+  const [selectedNumber, setSelectedNumber] = useState();
+  const [currentDice, setCurrentDice] = useState(1);
+  const [isSpinning, setIsSpinning] = useState(false);
+
   return (
     <MainContainer>
       <div className="top">
         <TotalScore />
-        <NumberSelector />
+          <NumberSelector selectedNumber={selectedNumber} setSelectedNumber={setSelectedNumber} />
       </div>
       
-      <RollDice />
+      <RollDice currentDice={currentDice} setCurrentDice={setCurrentDice} isSpinning={isSpinning} setIsSpinning={setIsSpinning} />
     </MainContainer>
   )
 }

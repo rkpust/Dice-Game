@@ -1,9 +1,6 @@
-import { useState } from "react";
 import styled from "styled-components";
 
-const RollDice = () => {
-    const [currentDice, setCurrentDice] = useState(1);
-    const [isSpinning, setSpinning] = useState(false);
+const RollDice = ({currentDice, setCurrentDice, isSpinning, setIsSpinning}) => {
     const audio = new Audio('audio/dice-rolling.mp3');
 
     // generate random number between 1 to 6
@@ -13,7 +10,7 @@ const RollDice = () => {
 
     // set spinning state
     const diceSpinning = () => {
-        setSpinning(!isSpinning);
+        setIsSpinning(!isSpinning);
       };
 
     // set dice functionality
@@ -34,7 +31,7 @@ const RollDice = () => {
             rollDice();
             diceSpinning();
         }}>
-            <img src={`images/dices/dice_${currentDice}.png`} style={{ transform: isSpinning ? 'rotate(360deg)' : 'none', transition: 'transform 0.3s ease-in-out', }} height={190} width={190} alt={`Dice ${currentDice}`}/>
+            <img src={`images/dices/dice_${currentDice}.png`} style={{ transform: isSpinning ? 'rotate(360deg)' : 'none', transition: 'transform 0.3s ease-in-out', }} height={180} width={180} alt={`Dice ${currentDice}`}/>
         </div>
         <p>Click on Dice to Roll</p>
     </RollDiceContainer>

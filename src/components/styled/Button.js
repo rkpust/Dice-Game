@@ -23,3 +23,15 @@ export const Button = styled.button`
       transition: 0.3s background ease-in;
     }
 `;
+
+export const ResetButton = styled(Button)`
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+
+    &:hover {
+      background-color: black;
+      border: 1px solid transparent;
+      color: white;
+    }
+`;

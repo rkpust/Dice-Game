@@ -1,33 +1,23 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import StartGame from "./components/StartGame";
+import PlayGame from "./components/PlayGame";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [isGameStarted, setIsGameStarted] = useState(false);
+  const audio = new Audio('audio/dice-rolling.mp3');
+
+  const toggleGamePlay = () => {
+    setIsGameStarted((previousState) => !previousState);
+    audio.play();
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {
+        isGameStarted ? <PlayGame /> : <StartGame toggle={toggleGamePlay} />
+      }
+
+      {/* https://www.figma.com/file/rephrU2FVgN8MFz6XhnP51/Learn-React-with-10-Projects?type=design&node-id=21-179&mode=design */}
     </>
   )
 }

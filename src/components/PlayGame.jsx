@@ -4,7 +4,8 @@ import NumberSelector from "./NumberSelector";
 import TotalScore from "./TotalScore";
 import RollDice from "./RollDice";
 import GameRules from "./GameRules";
-
+import WinnerDialog from "./WinnerDialog";
+import LoserDialog from "./LoserDialog";
 import { Button, ResetButton } from "./styled/Button";
 
 const PlayGame = () => {
@@ -14,6 +15,8 @@ const PlayGame = () => {
   const [isSpinning, setIsSpinning] = useState(false);
   const [error, setError] = useState("");
   const [showRules, setShowRules] = useState(false);
+  const [ShowWinnerDialog, setShowWinnerDialog] = useState(false);
+  const [ShowLoserDialog, setShowLoserDialog] = useState(false);
 
   const audio = new Audio('audio/dice-rolling.mp3');
 
@@ -40,9 +43,20 @@ const PlayGame = () => {
 
         if (receivedNumber == selectedNumber) {
           setScore((prev) => prev + receivedNumber);
+          console.log("prev=");
+          console.log(score + receivedNumber);
+          if ((score + receivedNumber) >= 50) {
+            console.log("You are winner.")
+            setShowWinnerDialog(true);
+          }
         }
         else {
           setScore((prev) => prev - 1 );
+          if ((score - 1) <= -50) {
+            console.log("You are Loser.");
+            setShowLoserDialog(true);
+          }
+          
         }
     }
 
@@ -52,6 +66,8 @@ const PlayGame = () => {
       setCurrentDice(1);
       setIsSpinning(false);
       setScore(0);
+      setShowWinnerDialog(false);
+      setShowLoserDialog(false);
     }
 
     const showGameRules = () => {
@@ -62,7 +78,7 @@ const PlayGame = () => {
     <MainContainer>
       <div className="top">
         <TotalScore score={score} />
-          <NumberSelector selectedNumber={selectedNumber} setSelectedNumber={setSelectedNumber} error={error} setError={setError} />
+        <NumberSelector selectedNumber={selectedNumber} setSelectedNumber={setSelectedNumber} error={error} setError={setError} />
       </div>
       
       <RollDice currentDice={currentDice} isSpinning={isSpinning} rollDice={rollDice} />
@@ -71,6 +87,8 @@ const PlayGame = () => {
       <Button onClick={showGameRules}>Show Rules</Button>
       </div>
       {showRules ? <GameRules showGameRules={showGameRules} /> : showRules}
+      {ShowWinnerDialog ? <WinnerDialog score={score} resetGame={resetGame} /> : "" }
+      {ShowLoserDialog ? <LoserDialog score={score} resetGame={resetGame} /> : "" }
     </MainContainer>
   )
 }
@@ -78,8 +96,6 @@ const PlayGame = () => {
 export default PlayGame;
 
 const MainContainer = styled.main`
-  /* opacity: ${(props) => (!props.showRules ? "0.5" : "1")}; */
-
   .top {
     display: flex;
     justify-content: space-around;
